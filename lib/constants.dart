@@ -41,3 +41,42 @@ const kTextFieldDecoration = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(28.0)),
   ),
 );
+
+const kAppText = TextStyle(
+  fontSize: 40,
+  fontWeight: FontWeight.bold,
+  letterSpacing: 1,
+);
+
+const kContactDetails = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 23,
+  color: black,
+);
+
+Future<void> showMyDialog(context, text) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Error'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text(text),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Back'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "692175820068",
+    "project_id": "librarian-e4d8b",
+    "storage_bucket": "librarian-e4d8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692175820068:android:78f3b93e06500ea3404fb1",
+        "android_client_info": {
+          "package_name": "com.example.librarian"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692175820068-mi8dr0u4p3veb5lmb5ado3ra4o47ijgf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6cesnc68djagXU8ehwWHlaVlw5WQx7Ps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692175820068-mi8dr0u4p3veb5lmb5ado3ra4o47ijgf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
