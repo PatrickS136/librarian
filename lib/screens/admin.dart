@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:librarian/components/reusableButton.dart';
 import 'package:librarian/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:librarian/screens/changeContact.dart';
 
 final String adminId = "/admin";
 
@@ -84,7 +85,9 @@ class _AdminState extends State<Admin> {
             ),
             ReusableButton(
               text: "Manage contact",
-              onPressed: null,
+              onPressed: () {
+                Navigator.pushNamed(context, changeContactId);
+              },
             ),
             ReusableButton(
               text: "Find User",

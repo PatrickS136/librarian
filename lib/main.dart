@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:librarian/screens/admin.dart';
+import 'package:librarian/screens/changeContact.dart';
 import 'package:librarian/screens/contact.dart';
 import 'package:librarian/screens/register.dart';
 import 'package:librarian/screens/user.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
             adminId: (context) => Admin(),
             userId: (context) => User(),
             contactId: (context) => Contact(),
+            changeContactId: (context) => ChangeContact(),
           },
         );
       },
