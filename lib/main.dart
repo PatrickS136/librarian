@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:librarian/screens/admin.dart';
+import 'package:librarian/screens/register.dart';
+import 'package:librarian/screens/user.dart';
 import 'package:librarian/screens/welcomeScreen.dart';
+import 'package:librarian/screens/login.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +16,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Librarian',
-      home: WelcomeScreen(),
+      initialRoute: welcomeId,
+      routes: {
+        welcomeId: (context) => WelcomeScreen(),
+        loginId: (context) => Login(),
+        registerId: (context) => Register(),
+        adminId: (context) => Admin(),
+        userId: (context) => User(),
+      },
     );
   }
 }
