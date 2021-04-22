@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:librarian/components/allUsers.dart';
 import 'package:librarian/components/reusableButton.dart';
 import 'package:librarian/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:librarian/screens/changeContact.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 final String adminId = "/admin";
 
@@ -68,19 +70,11 @@ class _AdminState extends State<Admin> {
               height: 25,
             ),
             ReusableButton(
-              text: "Manage books",
-              onPressed: null,
-            ),
-            ReusableButton(
               text: "Validate requests",
               onPressed: null,
             ),
             ReusableButton(
               text: "Validate returns",
-              onPressed: null,
-            ),
-            ReusableButton(
-              text: "Fine calculations",
               onPressed: null,
             ),
             ReusableButton(
@@ -90,8 +84,10 @@ class _AdminState extends State<Admin> {
               },
             ),
             ReusableButton(
-              text: "Find User",
-              onPressed: null,
+              text: "List of users",
+              onPressed: () {
+                Navigator.pushNamed(context, allUsersId);
+              },
             ),
           ],
         ),

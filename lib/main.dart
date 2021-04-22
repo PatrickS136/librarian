@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:librarian/components/allUsers.dart';
 import 'package:librarian/components/myBooks.dart';
 import 'package:librarian/screens/admin.dart';
 import 'package:librarian/screens/browseBooks.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
             changeContactId: (context) => ChangeContact(),
             browseId: (context) => BrowseBooks(),
             myBooksId: (context) => MyBooks(),
+            allUsersId: (context) => AllUsers(),
           },
         );
       },

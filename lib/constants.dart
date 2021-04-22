@@ -195,3 +195,16 @@ class MyBookArgs {
   final books;
   MyBookArgs({this.email, this.books});
 }
+
+dynamic getAllUsers(context) {
+  List<Widget> bookWidgets = [];
+  final _firestore = FirebaseFirestore.instance;
+  dynamic collectionStream = _firestore.collection('users').snapshots();
+  return ListView(
+    children: collectionStream.data.docs.map((DocumentSnapshot document) {
+      return ListTile(
+        title: Text(document.data()['email']),
+      );
+    }).toList(),
+  );
+}
