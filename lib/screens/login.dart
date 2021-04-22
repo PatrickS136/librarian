@@ -86,7 +86,7 @@ class _LoginState extends State<Login> {
                             password == "123456") {
                           Navigator.pushNamed(context, adminId);
                         } else {
-                          Navigator.pushNamed(context, userId);
+                          Navigator.pushNamed(context, userLoginId);
                         }
                       }
                       setSpin();

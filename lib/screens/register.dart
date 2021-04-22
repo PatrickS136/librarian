@@ -79,7 +79,7 @@ class _RegisterState extends State<Register> {
                           await _auth.createUserWithEmailAndPassword(
                               email: email, password: password);
                       if (newUser != null) {
-                        Navigator.pushNamed((context), userId);
+                        Navigator.pushNamed((context), userRegisterId);
                       }
                       setSpin();
                     } on FirebaseAuthException catch (e) {

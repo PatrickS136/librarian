@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:librarian/components/myBooks.dart';
 import 'package:librarian/screens/admin.dart';
+import 'package:librarian/screens/browseBooks.dart';
 import 'package:librarian/screens/changeContact.dart';
 import 'package:librarian/screens/contact.dart';
 import 'package:librarian/screens/register.dart';
@@ -28,9 +30,16 @@ class MyApp extends StatelessWidget {
             loginId: (context) => Login(),
             registerId: (context) => Register(),
             adminId: (context) => Admin(),
-            userId: (context) => User(),
+            userRegisterId: (context) => User(
+                  newUser: true,
+                ),
+            userLoginId: (context) => User(
+                  newUser: false,
+                ),
             contactId: (context) => Contact(),
             changeContactId: (context) => ChangeContact(),
+            browseId: (context) => BrowseBooks(),
+            myBooksId: (context) => MyBooks(),
           },
         );
       },

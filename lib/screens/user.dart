@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:librarian/components/myBooks.dart';
 import 'package:librarian/constants.dart';
 import 'package:librarian/components/reusableButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:librarian/screens/browseBooks.dart';
 import 'package:librarian/screens/contact.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-final userId = "/user";
+final userRegisterId = "/userRegister";
+final userLoginId = "/userLogin";
 
 class User extends StatefulWidget {
+  final bool newUser;
+  User({this.newUser});
   @override
   _UserState createState() => _UserState();
 }
@@ -14,11 +20,43 @@ class User extends StatefulWidget {
 class _UserState extends State<User> {
   final _auth = FirebaseAuth.instance;
   var loggedInUser;
+  int invoices;
+  var books;
+  // final _firestore = FirebaseFirestore.instance;
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  Future<void> addUser(String email) {
+    return users
+        .doc(email)
+        .set({
+          'email': email,
+          'invoice': 0,
+          'books': [],
+        })
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
+  }
+
   void getCurrentUser() {
     try {
       final thisUser = _auth.currentUser;
       if (thisUser != null) {
         loggedInUser = thisUser;
+        if (widget.newUser == true) {
+          addUser(thisUser.email);
+        }
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(thisUser.email)
+            .get()
+            .then((DocumentSnapshot documentSnapshot) {
+          if (documentSnapshot.exists) {
+            print('Document data: ${documentSnapshot.data()}');
+            books = documentSnapshot.data()["books"];
+            invoices = documentSnapshot.data()["invoice"];
+          } else {
+            print('Document does not exist on the database');
+          }
+        });
       }
     } catch (e) {
       print(e);
@@ -67,19 +105,26 @@ class _UserState extends State<User> {
             ),
             ReusableButton(
               text: "My books",
-              onPressed: null,
-            ),
-            ReusableButton(
-              text: "Borrow a book",
-              onPressed: null,
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  myBooksId,
+                  arguments:
+                      MyBookArgs(email: _auth.currentUser.email, books: books),
+                );
+              },
             ),
             ReusableButton(
               text: "Search Library",
-              onPressed: null,
+              onPressed: () {
+                Navigator.pushNamed(context, browseId);
+              },
             ),
             ReusableButton(
               text: "Invoices",
-              onPressed: null,
+              onPressed: () {
+                showInvoices(context, invoices);
+              },
             ),
             ReusableButton(
               text: "Contact us",

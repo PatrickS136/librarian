@@ -12,7 +12,7 @@ class ChangeContact extends StatefulWidget {
 }
 
 class _ChangeContactState extends State<ChangeContact> {
-  final _firestore = FirebaseFirestore.instance;
+  // final _firestore = FirebaseFirestore.instance;
   CollectionReference users = FirebaseFirestore.instance.collection('contact');
   String address;
   String name;

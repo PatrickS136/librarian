@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 const Color cream = Color.fromRGBO(240, 227, 202, 1);
@@ -79,4 +80,118 @@ Future<void> showMyDialog(context, text) async {
       );
     },
   );
+}
+
+Future<void> showInvoices(context, text) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('My Invoices'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Total : $text'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<void> showBookDescription(context, title, text) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(title),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text(text),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Back'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+dynamic browseBooks(context) {
+  final _firestore = FirebaseFirestore.instance;
+  return StreamBuilder<QuerySnapshot>(
+    stream: _firestore.collection('books').snapshots(),
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        List<Widget> messageWidgets = [];
+        for (var i in snapshot.data.docs) {
+          final title = i.data()["title"];
+          final author = i.data()["author"];
+          final description = i.data()["description"];
+          final category = i.data()["category"];
+          messageWidgets.add(
+            ListTile(
+              title: Text('$title by $author'),
+              subtitle: Text('Category : $category'),
+              onTap: () {
+                showBookDescription(context, title, description);
+              },
+            ),
+          );
+        }
+        return ListView(children: messageWidgets);
+      } else {
+        return Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.lightBlueAccent,
+          ),
+        );
+      }
+    },
+  );
+}
+
+dynamic myBooks(context, String email, books) {
+  List<Widget> bookWidgets = [];
+  for (var i in books) {
+    final title = i["title"];
+    final author = i["author"];
+    final description = i["description"];
+    final category = i["category"];
+    bookWidgets.add(
+      ListTile(
+        title: Text('$title by $author'),
+        subtitle: Text('Category : $category'),
+        onTap: () {
+          showBookDescription(context, title, description);
+        },
+      ),
+    );
+  }
+  return ListView(children: bookWidgets);
+}
+
+class MyBookArgs {
+  final email;
+  final books;
+  MyBookArgs({this.email, this.books});
 }
