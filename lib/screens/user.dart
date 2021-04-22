@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:librarian/components/myBooks.dart';
 import 'package:librarian/constants.dart';
 import 'package:librarian/components/reusableButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,7 +19,6 @@ class User extends StatefulWidget {
 class _UserState extends State<User> {
   final _auth = FirebaseAuth.instance;
   var loggedInUser;
-  int invoices;
   var books;
   // final _firestore = FirebaseFirestore.instance;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
@@ -29,8 +27,7 @@ class _UserState extends State<User> {
         .doc(email)
         .set({
           'email': email,
-          'invoice': 0,
-          'books': [],
+          'books': {},
         })
         .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));
@@ -52,7 +49,6 @@ class _UserState extends State<User> {
           if (documentSnapshot.exists) {
             print('Document data: ${documentSnapshot.data()}');
             books = documentSnapshot.data()["books"];
-            invoices = documentSnapshot.data()["invoice"];
           } else {
             print('Document does not exist on the database');
           }
@@ -104,26 +100,16 @@ class _UserState extends State<User> {
               height: 25,
             ),
             ReusableButton(
-              text: "My books",
+              text: "My book",
               onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  myBooksId,
-                  arguments:
-                      MyBookArgs(email: _auth.currentUser.email, books: books),
-                );
+                currentlyBorrowing(context,
+                    (books["title"] != null) ? books["title"] : "No book");
               },
             ),
             ReusableButton(
               text: "Search Library",
               onPressed: () {
                 Navigator.pushNamed(context, browseId);
-              },
-            ),
-            ReusableButton(
-              text: "Invoices",
-              onPressed: () {
-                showInvoices(context, invoices);
               },
             ),
             ReusableButton(

@@ -82,23 +82,23 @@ Future<void> showMyDialog(context, text) async {
   );
 }
 
-Future<void> showInvoices(context, text) async {
+Future<void> currentlyBorrowing(context, text) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('My Invoices'),
+        title: Text('I am currently borrowing: '),
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
-              Text('Total : $text'),
+              Text(text),
             ],
           ),
         ),
         actions: <Widget>[
           TextButton(
-            child: Text('OK'),
+            child: Text('Ok'),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -170,34 +170,7 @@ dynamic browseBooks(context) {
   );
 }
 
-dynamic myBooks(context, String email, books) {
-  List<Widget> bookWidgets = [];
-  for (var i in books) {
-    final title = i["title"];
-    final author = i["author"];
-    final description = i["description"];
-    final category = i["category"];
-    bookWidgets.add(
-      ListTile(
-        title: Text('$title by $author'),
-        subtitle: Text('Category : $category'),
-        onTap: () {
-          showBookDescription(context, title, description);
-        },
-      ),
-    );
-  }
-  return ListView(children: bookWidgets);
-}
-
-class MyBookArgs {
-  final email;
-  final books;
-  MyBookArgs({this.email, this.books});
-}
-
 dynamic getAllUsers(context) {
-  List<Widget> bookWidgets = [];
   final _firestore = FirebaseFirestore.instance;
   dynamic collectionStream = _firestore.collection('users').snapshots();
   return ListView(

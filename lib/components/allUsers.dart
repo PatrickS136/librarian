@@ -26,15 +26,18 @@ class AllUsers extends StatelessWidget {
 
             return ListView(
               children: snapshot.data.docs.map((DocumentSnapshot document) {
-                List<String> borrowedBooks = [];
+                // List<String> borrowedBooks = [];
 
-                for (var i in document.data()['books']) {
-                  borrowedBooks.add(i["title"]);
-                }
+                // for (var i in document.data()['books']) {
+                //   borrowedBooks.add(i["title"]);
+                // }
                 return ListTile(
-                  title: Text(
-                      "${document.data()['email']}, currently borrowing ${document.data()['books'].length}"),
-                  subtitle: Text("$borrowedBooks"),
+                  title: Text("${document.data()['email']},"),
+                  subtitle: (document.data()['books']['title'] != "" &&
+                          document.data()['books']['title'] != null)
+                      ? Text(
+                          "currently borrowing : ${document.data()['books']['title']}")
+                      : Text("Not borrowing a book"),
                 );
               }).toList(),
             );

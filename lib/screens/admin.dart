@@ -4,6 +4,8 @@ import 'package:librarian/components/reusableButton.dart';
 import 'package:librarian/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:librarian/screens/changeContact.dart';
+import 'package:librarian/screens/validateRequests.dart';
+import 'package:librarian/screens/validateReturns.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
 final String adminId = "/admin";
@@ -71,11 +73,15 @@ class _AdminState extends State<Admin> {
             ),
             ReusableButton(
               text: "Validate requests",
-              onPressed: null,
+              onPressed: () {
+                Navigator.pushNamed(context, requestsId);
+              },
             ),
             ReusableButton(
               text: "Validate returns",
-              onPressed: null,
+              onPressed: () {
+                Navigator.pushNamed(context, returnId);
+              },
             ),
             ReusableButton(
               text: "Manage contact",

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:librarian/components/allUsers.dart';
-import 'package:librarian/components/myBooks.dart';
 import 'package:librarian/screens/admin.dart';
 import 'package:librarian/screens/browseBooks.dart';
 import 'package:librarian/screens/changeContact.dart';
 import 'package:librarian/screens/contact.dart';
 import 'package:librarian/screens/register.dart';
 import 'package:librarian/screens/user.dart';
+import 'package:librarian/screens/validateRequests.dart';
+import 'package:librarian/screens/validateReturns.dart';
 import 'package:librarian/screens/welcomeScreen.dart';
 import 'package:librarian/screens/login.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -40,8 +41,9 @@ class MyApp extends StatelessWidget {
             contactId: (context) => Contact(),
             changeContactId: (context) => ChangeContact(),
             browseId: (context) => BrowseBooks(),
-            myBooksId: (context) => MyBooks(),
             allUsersId: (context) => AllUsers(),
+            requestsId: (context) => ValidateRequests(),
+            returnId: (context) => ValidateReturns(),
           },
         );
       },
