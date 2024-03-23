@@ -2,7 +2,7 @@
 
 A library management system made with Flutter and Firebase(Auth and Firestore)
 
-Screenshots below ran on the Nexus 6 virtual device, not yet tested on an iOS device
+Screenshots below ran on the Nexus 6 virtual device
 
 <h2>Startup Screen</h2>
 <hr>
